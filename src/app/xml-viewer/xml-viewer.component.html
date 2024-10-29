@@ -5,14 +5,15 @@
   <!-- Search input -->
   <input type="text" placeholder="Search..." (input)="onSearch($event)">
 
+
+
+  <ng-container>
+    <div class="formatted-xml"></div>
+  </ng-container>
   <!-- XML content display -->
   <ng-container *ngIf="xmlContent as content">
     <div class="xml-content">
       <pre>{{content}}</pre>
     </div>
-  </ng-container>
-
-  <ng-container>
-    <div class="formatted-xml"></div>
   </ng-container>
 </div>
