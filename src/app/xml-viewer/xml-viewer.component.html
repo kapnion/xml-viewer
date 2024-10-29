@@ -2,6 +2,9 @@
   <!-- File input -->
   <input type="file" (change)="onFileSelected($event)" accept=".xml">
 
+  <!-- Search input -->
+  <input type="text" placeholder="Search..." (input)="onSearch($event)">
+
   <!-- XML content display -->
   <ng-container *ngIf="xmlContent as content">
     <div class="xml-content">

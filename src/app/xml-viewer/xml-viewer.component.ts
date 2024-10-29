@@ -13,6 +13,7 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 export class XmlViewerComponent implements OnInit, AfterViewInit {
   xmlContent: string | null = null;
   formattedXml: SafeHtml | null = null;
+  searchQuery: string = '';
 
   constructor(
     private http: HttpClient,
@@ -35,6 +36,13 @@ export class XmlViewerComponent implements OnInit, AfterViewInit {
         this.formatXml(content);
       };
       reader.readAsText(file);
+    }
+  }
+
+  onSearch(event: any) {
+    this.searchQuery = event.target.value;
+    if (this.xmlContent) {
+      this.formatXml(this.xmlContent);
     }
   }
 
@@ -124,9 +132,17 @@ export class XmlViewerComponent implements OnInit, AfterViewInit {
       if (text) {
         const textElement = this.renderer.createElement('div');
         this.renderer.setStyle(textElement, 'color', '#000000');
-        this.renderer.setProperty(textElement, 'innerHTML', text);
+        this.renderer.setProperty(textElement, 'innerHTML', this.highlightText(text));
         this.renderer.appendChild(parent, textElement);
       }
     }
+  }
+
+  highlightText(text: string): string {
+    if (!this.searchQuery) {
+      return text;
+    }
+    const regex = new RegExp(`(${this.searchQuery})`, 'gi');
+    return text.replace(regex, '<span style="background-color: yellow;">$1</span>');
   }
 }

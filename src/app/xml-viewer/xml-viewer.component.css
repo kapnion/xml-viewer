@@ -24,3 +24,6 @@
 .xml-node.collapsible.expanded + .xml-children {
   display: block;
 }
+.highlight {
+  background-color: yellow!important; /* Highlight color for search results */
+}
