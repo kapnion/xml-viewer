@@ -1,0 +1,16 @@
+<div class="xml-viewer">
+  <!-- File input -->
+  <input type="file" (change)="onFileSelected($event)" accept=".xml">
+
+  <!-- XML content display -->
+  <ng-container *ngIf="xmlContent as content">
+    <div class="xml-content">
+      <pre>{{content}}</pre>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="formattedXml as formatted">
+    <div class="formatted-xml" [innerHTML]="formatted"></div>
+  </ng-container>
+</div>
+
