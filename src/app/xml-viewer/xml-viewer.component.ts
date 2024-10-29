@@ -82,17 +82,17 @@ export class XmlViewerComponent implements OnInit, AfterViewInit {
         this.renderer.addClass(nodeElement, 'expanded'); // Expand by default
       }
       this.renderer.setStyle(nodeElement, 'color', '#800000');
-      this.renderer.setProperty(nodeElement, 'innerHTML', `&lt;${element.tagName}`);
+      this.renderer.setProperty(nodeElement, 'innerHTML', `&lt;${this.highlightText(element.tagName)}`);
 
       Array.from(element.attributes).forEach(attr => {
         const attrElement = this.renderer.createElement('span');
         this.renderer.setStyle(attrElement, 'color', '#ff0000');
-        this.renderer.setProperty(attrElement, 'innerHTML', ` ${attr.name}=`);
+        this.renderer.setProperty(attrElement, 'innerHTML', ` ${this.highlightText(attr.name)}=`);
         this.renderer.appendChild(nodeElement, attrElement);
 
         const valueElement = this.renderer.createElement('span');
         this.renderer.setStyle(valueElement, 'color', '#0000ff');
-        this.renderer.setProperty(valueElement, 'innerHTML', `"${attr.value}"`);
+        this.renderer.setProperty(valueElement, 'innerHTML', `"${this.highlightText(attr.value)}"`);
         this.renderer.appendChild(nodeElement, valueElement);
       });
 
@@ -116,7 +116,7 @@ export class XmlViewerComponent implements OnInit, AfterViewInit {
       const closingElement = this.renderer.createElement('div');
       this.renderer.addClass(closingElement, 'xml-node');
       this.renderer.setStyle(closingElement, 'color', '#800000');
-      this.renderer.setProperty(closingElement, 'innerHTML', `&lt;/${element.tagName}&gt;`);
+      this.renderer.setProperty(closingElement, 'innerHTML', `&lt;/${this.highlightText(element.tagName)}&gt;`);
       this.renderer.appendChild(parent, closingElement);
 
       if (collapsibleClass) {
